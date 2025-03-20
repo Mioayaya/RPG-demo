@@ -1,10 +1,19 @@
-# 忽略所有文件和目录
+# 忽略所有文件
 *
-# 保留 .gitignore 文件（否则会被忽略）
+Library/
+Temp/
+Logs/
+Assets/Res/
+
+# 保留 .gitignore 文件
 !.gitignore
-# 保留所有目录结构（允许 Git 递归跟踪子目录）
+
+# 保留所有目录结构（允许 Git 遍历子目录）
 !*/
-# 保留目标扩展名的文件
-!*.cs
-!*.md
-!*.drawio
+
+# 保留根目录下的 .md 和 .drawio 文件
+!/*.md
+!/*.drawio
+
+# 保留 Assets/Res/Scripts 目录下的所有 .cs 文件（包括子目录）
+!/Assets/Scripts/**/*.cs
