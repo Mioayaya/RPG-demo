@@ -2,8 +2,8 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class Player_Controller : CharacterBase
 {
@@ -35,7 +35,13 @@ public class Player_Controller : CharacterBase
     [Header("强化普攻")]
     public StandAttackEffectType standEffectType = StandAttackEffectType.Normal;
     public SkillConfig[] enhancedStandAttackConfigs;
-    public SkillConfig[] currentStandAttackConfigs;  // 当前普攻配置状态
+    [NonSerialized]public SkillConfig[] currentStandAttackConfigs;  // 当前普攻配置状态
+    
+    [Header("索敌相关")]
+    public Transform detectPoint;  // 检测中心点
+    public float detectRadius = 10f; // 索敌半径
+    public LayerMask enemyLayer;    // 敌人层级
+    [NonSerialized] public Boss_Controller currentEnemy;  // 当前索敌敌人
     #endregion
 
     public enum StandAttackEffectType
@@ -61,7 +67,76 @@ public class Player_Controller : CharacterBase
     private void Update()
     {
         UpDateSkillCDTime();
+        // 索敌
+        if (Input.GetMouseButtonDown(2))
+        {
+            // 首次按下 寻找最近的敌人
+            if (currentEnemy == null)
+            {
+                FindNearestEnemy();                
+            }
+            // 取消锁定
+            else ClearDetectEnemy();
+        }
     }
+#region 索敌
+    private void FindNearestEnemy()
+    {
+        Collider[] enemies = Physics.OverlapSphere(
+            detectPoint.position,
+            detectRadius,
+            enemyLayer
+        );        
+
+        if (enemies.Length == 0) return;
+
+        // 使用LINQ快速找到最近敌人（按平方距离优化性能）
+        var nearest = enemies
+            .Where(c => c.GetComponent<Boss_Controller>() != null)
+            .OrderBy(c => (c.transform.position - detectPoint.position).sqrMagnitude)
+            .FirstOrDefault();        
+
+        if (nearest != null)
+        {
+            currentEnemy = nearest.GetComponent<Boss_Controller>();
+            //currentEnemy.test;
+        }
+
+        if(currentEnemy != null)
+        {
+            Debug.Log("索敌到了?");
+        }
+    }
+
+    private void ClearDetectEnemy()
+    {
+        if (currentEnemy != null) currentEnemy = null;        
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (detectPoint != null)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(detectPoint.position, detectRadius);
+        }
+    }
+
+#endregion
+
+    // 可选：持续跟踪目标（如果目标移动后超出范围则自动取消）
+    void FixedUpdate()
+    {
+        if (currentEnemy != null &&
+            Vector3.Distance(detectPoint.position, currentEnemy.transform.position) > detectRadius
+            )
+        {
+            ClearDetectEnemy();
+        }
+    }
+
+    // 调试用可视化范围
+    
 
     public void ChangeState(PlayerState playerState, bool reCurrentState = false)
     {
