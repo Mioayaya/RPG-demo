@@ -1,0 +1,65 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36" version="26.1.0">
+  <diagram id="15qk9W_dyiWnK-Yw02IW" name="第 1 页">
+    <mxGraphModel dx="1221" dy="3110" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-1" value="SingletonMono" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="120" y="-2320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-4" value="abstract class StateBase" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="280" y="-2320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-6" value="StateMachine" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d0cee2;strokeColor=#56517e;" vertex="1" parent="1">
+          <mxGeometry x="440" y="-2320" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-7" value="IStateMachinerOwner" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;gradientColor=#97d077;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="600" y="-2320" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="TC7gxKFRcBkmrikDKaIk-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="-2170" as="sourcePoint" />
+            <mxPoint x="180" y="-2260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="100" y="-2215" />
+              <mxPoint x="180" y="-2215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-8" value="MonoManager" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;gradientColor=#7ea6e0;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="40" y="-2160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-10" value="StateBase" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="490" y="-2270" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-12" value="Player_Controller" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="40" y="-2060" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-14" value="Player_Modle" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="250" y="-2050" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-15" value="Player_Modle" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="110" y="-2010" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-16" value="PlayerState" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="680" y="-2200" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="TC7gxKFRcBkmrikDKaIk-18" target="TC7gxKFRcBkmrikDKaIk-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-18" value="PlayerStateBase" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="265" y="-2190" width="185" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-21" value="Player_Controller" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="340" y="-2110" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="TC7gxKFRcBkmrikDKaIk-22" target="TC7gxKFRcBkmrikDKaIk-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TC7gxKFRcBkmrikDKaIk-22" value="Player_IdleState ···" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="510" y="-2080" width="140" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
