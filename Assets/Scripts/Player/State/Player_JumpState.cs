@@ -23,8 +23,10 @@ public class Player_JumpState : PlayerStateBase
 
     private void OnRootMotion(Vector3 deltaPosition, Quaternion deltaRotation)
     {
+        deltaPosition.x = 0;
+        deltaPosition.z = 0;
         deltaPosition.y *= player.jumpPower;
-        Vector3 offset = player.Model.transform.TransformDirection(jumpPower * Time.deltaTime * player.moveSpeedForJump * player.Model.transform.forward);
+        Vector3 offset = jumpPower * Time.deltaTime * player.moveSpeedForJump * player.Model.transform.forward;        
         player.CharacterController.Move(deltaPosition + offset);
     }
 

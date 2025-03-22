@@ -182,6 +182,7 @@ public abstract class CharacterBase : MonoBehaviour, IStateMachinerOwner, ISkill
 
     public void PlayAnimation(string animationName, float fixedTransitionDuration = 0.25f)
     {
+        if (animationName == null) return;
         model.Animator.CrossFadeInFixedTime(animationName, fixedTransitionDuration);
     }
 

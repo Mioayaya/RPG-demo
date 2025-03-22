@@ -22,14 +22,14 @@ public class Player_IdleState: PlayerStateBase
             return;
         }
 
-        // todo: ¼ì²â¹¥»÷
+        // ¼ì²â¹¥»÷
         if(Input.GetMouseButtonDown(0))
         {
             player.ChangeState(PlayerState.StandAttack);
             return;
         }
 
-        // todo: ¼ì²âÌøÔ¾
+        // ¼ì²âÌøÔ¾
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // ÇĞ»»µ½ÌøÔ¾×´Ì¬

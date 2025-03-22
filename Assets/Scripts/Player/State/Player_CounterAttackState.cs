@@ -8,8 +8,7 @@ public class Player_CounterAttackState:PlayerStateBase
         // 注册根运动
         //player.Model.SetRootMotionAction(OnRootMotion);
 
-        // 转向受伤源 
-        // todo: 通过锁敌
+        // 转向受伤源        
         player.ModelTransForm.LookAt(hurtSource.ModelTransForm);
 
         // 播放技能

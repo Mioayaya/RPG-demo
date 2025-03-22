@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 public class Player_StandAttack: PlayerStateBase
 {
@@ -24,6 +25,7 @@ public class Player_StandAttack: PlayerStateBase
 
     public override void Update()
     {
+        if(player.currentEnemy != null) player.ModelTransForm.LookAt(player.currentEnemy.transform.position);
 
         // 待机检测
         bool ret = CheekAnimatorStateName(player.currentStandAttackConfigs[CurrentAttackIndex].AnimationName, out float animationTime);

@@ -117,24 +117,23 @@ public class Player_AirDownState : PlayerStateBase
 
     private void AirControll()
     {
-        // 空中位移
+        // 空中旋转
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-
         Vector3 motion = new Vector3(0, player.gravity * Time.deltaTime, 0);
+
         if (h != 0 || v != 0)
         {
             Vector3 input = new Vector3(h, 0, v);
-            Vector3 dir = Camera.main.transform.TransformDirection(input);
-            motion.x = player.moveSpeedForAirDown * Time.deltaTime * dir.x;
-            motion.z = player.moveSpeedForAirDown * Time.deltaTime * dir.z;
-            player.CharacterController.Move(player.moveSpeedForAirDown * Time.deltaTime * dir);
-            // 旋转
-            //float y = Camera.main.transform.rotation.eulerAngles.y;
-            //Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;
-            //player.Model.transform.rotation = Quaternion.Slerp(player.Model.transform.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * player.rotateSpeed);
-
+            Vector3 dir = Camera.main.transform.TransformDirection(input);            
+            float y = Camera.main.transform.rotation.eulerAngles.y;
+            Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;
+            player.Model.transform.rotation = Quaternion.Slerp( 
+                player.Model.transform.rotation, 
+                Quaternion.LookRotation(targetDir), 
+                Time.deltaTime * player.rotateSpeed);
         }
-        player.CharacterController.Move(motion);
+        Vector3 offset = jumpPower * Time.deltaTime * player.moveSpeedForAirDown * player.Model.transform.forward;
+        player.CharacterController.Move(motion + offset);
     }
 }

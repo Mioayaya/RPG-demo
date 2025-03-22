@@ -53,8 +53,10 @@ public class Player_Controller : CharacterBase
     {
         Idle,Walk,Run
     }
+    
     // 默认是待机状态
     [NonSerialized]public BeforeState beforeState = BeforeState.Idle;
+
     private void Start()
     {
         // 锁定鼠标
@@ -104,13 +106,17 @@ public class Player_Controller : CharacterBase
 
         if(currentEnemy != null)
         {
-            Debug.Log("索敌到了?");
+            currentEnemy.ToggleIconAlpha();
         }
     }
 
     private void ClearDetectEnemy()
     {
-        if (currentEnemy != null) currentEnemy = null;        
+        if (currentEnemy != null)
+        {
+            currentEnemy.ToggleIconAlpha();
+            currentEnemy = null;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -181,6 +187,8 @@ public class Player_Controller : CharacterBase
 
     public override void OnHit(IHurt target, Vector3 hitPosition)
     {
+        Debug.Log(currentHitIndex);
+        if (currentHitIndex >= currentSkillConfig.AttackData.Length) return;
         // 拿到这一段的攻击数据
         Skill_AttackData attackData = currentSkillConfig.AttackData[currentHitIndex];
         // 生成基于命中配置的效果
@@ -188,7 +196,7 @@ public class Player_Controller : CharacterBase
         // 播放效果类
         if (attackData.ScreenImpulseValue != 0) ScreenImpulse(attackData.ScreenImpulseValue);
         StartFreezeFrame(attackData.FreezeFrameTime);
-        StartFreezeGameTime(attackData.FreezeGameTime);
+        //StartFreezeGameTime(attackData.FreezeGameTime);
         // todo: 传递伤害数据
         target.Hurt(attackData.HitData, this);
     }
@@ -253,12 +261,16 @@ public class Player_Controller : CharacterBase
                     skillInfoList[i].currentTime = skillInfoList[i].cdTime;
                     return false;
                 }
+                
                 // 释放技能                
-                //ChangeState(PlayerState.SkillAttack, true);
+                ChangeState(PlayerState.SkillAttack, true);
                 Player_SkillAttack skillAttack = (Player_SkillAttack)stateMachine.currentState;
                 skillAttack.InitData(skillInfoList[i].skillConfig);
+                
                 // 让技能cd
+
                 skillInfoList[i].currentTime = skillInfoList[i].cdTime;
+
                 return true;
             }
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Boss_Controller : CharacterBase
 {
@@ -13,10 +14,23 @@ public class Boss_Controller : CharacterBase
     public float runSpeed;
     public float standAttackRang;
     public float standAttackCDTime = 3f;
+
+    public Image[] TrackIconList;
     private void Start()
     {
         Init();
         ChangeState(BossState.Idle);
+        foreach(var item in TrackIconList) item.color = new Color(1, 1, 1, 0);        
+    }
+
+    // ÇÐ»»Í¸Ã÷¶È
+    public void ToggleIconAlpha()
+    {
+        foreach (var item in TrackIconList)
+        {
+            float newAlpha = item.color.a == 0 ? 1f : 0f;            
+            item.color = new Color(1, 1, 1, newAlpha);
+        }
     }
 
     public void ChangeState(BossState bossState,bool reCurrentState = false)

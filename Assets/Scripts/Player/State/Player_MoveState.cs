@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player_MoveState: PlayerStateBase
 {
+    private Vector3 lastInput;
     private enum MoveChildeState
     {
         Move,
@@ -69,6 +70,8 @@ public class Player_MoveState: PlayerStateBase
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // Á¢¼´ÇÐ»»³¯Ïò
+            if(lastInput != Vector3.zero) player.Model.transform.rotation = Quaternion.LookRotation(lastInput);
             // ÇÐ»»µ½ÌøÔ¾×´Ì¬
             jumpPower = walk2RunTransition + 1;
             player.ChangeState(PlayerState.Jump);
@@ -166,7 +169,11 @@ public class Player_MoveState: PlayerStateBase
             Vector3 input = new Vector3(h, 0, v);
             float y = Camera.main.transform.rotation.eulerAngles.y;
             Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;
-            player.Model.transform.rotation = Quaternion.Slerp(player.Model.transform.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * player.rotateSpeed);
+            lastInput = targetDir;
+            player.Model.transform.rotation = Quaternion.Slerp(
+                player.Model.transform.rotation, 
+                Quaternion.LookRotation(targetDir),                 
+                Time.deltaTime * player.rotateSpeed);
 
         }
     }
@@ -196,7 +203,7 @@ public class Player_MoveState: PlayerStateBase
     }
 
     private void OnRootMotion(Vector3 deltaPosition,Quaternion deltaRotation)
-    {
+    {        
         deltaPosition.y = player.gravity * Time.deltaTime;
         player.CharacterController.Move(deltaPosition);
     }
