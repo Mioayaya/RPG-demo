@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SkillInfo
 {
     public KeyCode keyCode;
-    public bool isEnhanced;  // 是否是强化技能
+    public bool isEnhanced = false;  // 是否是强化技能
     public SkillConfig skillConfig;
     public float stillTime; // 持续时间
     public float cdTime;
