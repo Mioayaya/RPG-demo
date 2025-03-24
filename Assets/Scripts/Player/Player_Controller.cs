@@ -187,7 +187,6 @@ public class Player_Controller : CharacterBase
 
     public override void OnHit(IHurt target, Vector3 hitPosition)
     {
-        Debug.Log(currentHitIndex);
         if (currentHitIndex >= currentSkillConfig.AttackData.Length) return;
         // 拿到这一段的攻击数据
         Skill_AttackData attackData = currentSkillConfig.AttackData[currentHitIndex];
@@ -222,16 +221,16 @@ public class Player_Controller : CharacterBase
                 return;
             }
             // 否则 不会进入到受伤状态，
-            // todo: 并且收到的伤害降低
+            // 并且收到的伤害降低 50%
+            hitData.DamgeValue *= 0.5f;
             base.Hurt(hitData, hurtSource);
             return;
         }
-        // todo: Boss 霸体阶段
-        base.Hurt(hitData, hurtSource);
+        //base.Hurt(hitData, hurtSource);
+        ChangeState(PlayerState.Hurt, true);
         
         // 切换到受伤状态 
         // todo: 仅在boss特殊攻击下进入受伤状态
-        // ChangeState(PlayerState.Hurt, true);
     }
 
     /// <summary>
@@ -249,9 +248,9 @@ public class Player_Controller : CharacterBase
         for (int i = 0; i < skillInfoList.Count; i++)
         {
             if (skillInfoList[i].currentTime == 0 && Input.GetKeyDown(skillInfoList[i].keyCode))
-            {
+            {                
                 // 如果当前是 进入强化普攻状态
-                if (skillInfoList[i].isEnhanced)
+                if (skillInfoList[i].skillType == SkillInfo.SkillType.Enhanced)
                 {
                     if (enhancedAttackCoroutine != null) StopCoroutine(enhancedAttackCoroutine);
                     enhancedAttackCoroutine = StartCoroutine(EnhancedAttackDuration(skillInfoList[i].stillTime));
@@ -259,6 +258,13 @@ public class Player_Controller : CharacterBase
                     standEffectType = StandAttackEffectType.Enhanced;
                     ChangeStandAttackType();
                     skillInfoList[i].currentTime = skillInfoList[i].cdTime;
+                    return false;
+                }
+
+                // 切换武器的技能
+                if (skillInfoList[i].skillType == SkillInfo.SkillType.ChangeWeapon)
+                {
+                    // todo 切换武器
                     return false;
                 }
                 

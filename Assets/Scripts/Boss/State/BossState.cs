@@ -4,5 +4,6 @@ public enum BossState
     Walk,
     Run,
     Hurt,
-    Attack
+    Attack,
+    Dead
 }

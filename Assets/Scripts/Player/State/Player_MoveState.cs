@@ -165,7 +165,7 @@ public class Player_MoveState: PlayerStateBase
             }
             player.Model.Animator.speed = Mathf.Lerp(player.walkSpeed, player.runSpeed, walk2RunTransition);
 
-            // Ðý×ª
+            // Ðý×ª 
             Vector3 input = new Vector3(h, 0, v);
             float y = Camera.main.transform.rotation.eulerAngles.y;
             Vector3 targetDir = Quaternion.Euler(0, y, 0) * input;

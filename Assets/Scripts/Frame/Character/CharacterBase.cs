@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class CharacterBase : MonoBehaviour, IStateMachinerOwner, ISkillOwner, IHurt
 {
     public Transform ModelTransForm => Model.transform;
-    protected StateMachine stateMachine;
+    public StateMachine stateMachine;
 
     [SerializeField] protected ModelBase model;
     public ModelBase Model { get => model; }
@@ -15,6 +16,7 @@ public abstract class CharacterBase : MonoBehaviour, IStateMachinerOwner, ISkill
     public CharacterController CharacterController { get => characterController; }
 
     [SerializeField] protected AudioSource audioSource;
+    public Image cdMaskImage;
 
 
 
@@ -23,6 +25,8 @@ public abstract class CharacterBase : MonoBehaviour, IStateMachinerOwner, ISkill
     public List<string> enemyTagList;
     public SkillConfig[] standAttackConfigs;
     public float gravity = -9.8f;
+    public float Hp = 100f;
+    public float maxHp = 100f;
     #endregion
 
     public virtual void Init()
@@ -200,7 +204,15 @@ public abstract class CharacterBase : MonoBehaviour, IStateMachinerOwner, ISkill
     {
         this.hitData = hitData;
         this.hurtSource = hurtSource;
+        Hp -= hitData.DamgeValue;
+        cdMaskImage.fillAmount = Hp / maxHp;
     }
 
+    public virtual void CharacterDestory()
+    {
+        gameObject.SetActive(false);
+        stateMachine.Stop();
+        Destroy(gameObject);
+    }
     
 }

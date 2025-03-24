@@ -15,6 +15,7 @@ public class Boss_Controller : CharacterBase
     public float standAttackRang;
     public float standAttackCDTime = 3f;
 
+
     public Image[] TrackIconList;
     private void Start()
     {
@@ -52,6 +53,9 @@ public class Boss_Controller : CharacterBase
             case BossState.Attack:
                 stateMachine.ChangeState<Boss_AttackState>(reCurrentState);
                 break;
+            case BossState.Dead:
+                stateMachine.ChangeState<Boss_DeadState>(reCurrentState);
+                break;
 
         }
     }
@@ -62,6 +66,10 @@ public class Boss_Controller : CharacterBase
         // todo: Boss °ÔÌå½×¶Î
         base.Hurt(hitData, hurtSource);
         ChangeState(BossState.Hurt, true);
+        if(Hp <= 0)
+        {
+            ChangeState(BossState.Dead);
+        }
     }
 
 

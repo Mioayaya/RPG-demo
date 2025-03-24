@@ -4,8 +4,15 @@ using UnityEngine.UI;
 [Serializable]
 public class SkillInfo
 {
+    public enum SkillType
+    {
+        None,
+        Enhanced,
+        ChangeWeapon
+    }
+
     public KeyCode keyCode;
-    public bool isEnhanced = false;  // 是否是强化技能
+    public SkillType skillType;    
     public SkillConfig skillConfig;
     public float stillTime; // 持续时间
     public float cdTime;
