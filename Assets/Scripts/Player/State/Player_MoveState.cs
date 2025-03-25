@@ -16,7 +16,7 @@ public class Player_MoveState: PlayerStateBase
 
     private float walk2RunTransition = 0;  // 0~1
     //private bool walkState = true; // Ä¬ÈÏ×ßÂ·
-    private WalkState walkState = WalkState.Walk;
+    private WalkState walkState = WalkState.Run;
     private MoveChildeState moveState;
     private MoveChildeState MoveState
     {

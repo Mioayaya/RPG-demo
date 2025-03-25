@@ -27,17 +27,7 @@ public class Boss_AttackState : BossStateBase
     public override void Update()
     {
         // 持续平滑转向玩家
-        RotateTowardsPlayer();
-
-        // 待机检测
-        bool ret = CheekAnimatorStateName(boss.standAttackConfigs[CurrentAttackIndex].AnimationName, out float animationTime);
-        if (ret && animationTime >= 1)
-        {
-            // 回到待机
-            boss.ChangeState(BossState.Idle);
-            return;
-        }
-
+        RotateTowardsPlayer();      
         float distance = Vector3.Distance(boss.transform.position, boss.targetPlayer.transform.position);
         
         if (distance <= boss.standAttackRang && boss.CanSwitchSkill)
@@ -47,6 +37,14 @@ public class Boss_AttackState : BossStateBase
             return;
         }
 
+        // 待机检测
+        bool ret = CheekAnimatorStateName(boss.standAttackConfigs[CurrentAttackIndex].AnimationName, out float animationTime);
+        if (ret && boss.CanSwitchSkill)
+        {
+            // 回到待机
+            boss.ChangeState(BossState.Idle);
+            return;
+        }
     }
 
     public override void Exit()

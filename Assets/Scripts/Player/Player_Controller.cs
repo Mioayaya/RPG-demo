@@ -226,8 +226,8 @@ public class Player_Controller : CharacterBase
             base.Hurt(hitData, hurtSource);
             return;
         }
-        //base.Hurt(hitData, hurtSource);
-        ChangeState(PlayerState.Hurt, true);
+        base.Hurt(hitData, hurtSource);
+        //ChangeState(PlayerState.Hurt, true);
         
         // 切换到受伤状态 
         // todo: 仅在boss特殊攻击下进入受伤状态

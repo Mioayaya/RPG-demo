@@ -44,6 +44,7 @@ public class Player_DefenceState: PlayerStateBase
         // ×¢²á¸ùÔË¶¯
         player.Model.SetRootMotionAction(OnRootMotion);
         DefenceState = DefenceChildState.Enter;
+        if (player.currentEnemy != null) player.ModelTransForm.LookAt(player.currentEnemy.transform.position);
     }
 
     public override void Update()
